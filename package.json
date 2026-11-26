@@ -20,11 +20,13 @@
     "pg": "^8.23.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "ws": "^8.23.0"
-  },
-  "devDependencies": {
+    "ws": "^8.23.0",
     "@tailwindcss/postcss": "^4.3.5",
     "@tailwindcss/turbopack": "4.3.3",
+    "postcss": "^8.5.33",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -32,8 +34,6 @@
     "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
-    "postcss": "^8.5.33",
-    "tailwindcss": "4.3.3",
     "typescript": "^5"
   }
 }
