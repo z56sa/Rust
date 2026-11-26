@@ -76,7 +76,7 @@ export default async function Home() {
                       src={item.poster || "/logo.png"}
                       alt={item.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                      loading="lazy"
+                      loading="lazy" referrerPolicy="no-referrer" onError={(e: any) => { e.currentTarget.onerror = null; e.currentTarget.src = "/brand-logo.jpg"; }}
                     />
                     {/* الرتبة 1, 2, 3.. */}
                     <div className="absolute top-2 right-2 w-6 h-6 bg-white text-black font-black text-xs rounded-md flex items-center justify-center shadow-lg">
@@ -170,7 +170,7 @@ export default async function Home() {
                         src={anime.poster || "/logo.png"}
                         alt={anime.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
-                        loading="lazy"
+                        loading="lazy" referrerPolicy="no-referrer" onError={(e: any) => { e.currentTarget.onerror = null; e.currentTarget.src = "/brand-logo.jpg"; }}
                       />
                     </div>
                     <span className="text-xs font-semibold text-zinc-300 group-hover:text-white truncate">

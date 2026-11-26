@@ -73,7 +73,7 @@ export function RankedSliderSection({
                   src={item.poster || "/logo.png"}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                  loading="lazy"
+                  loading="lazy" referrerPolicy="no-referrer" onError={(e: any) => { e.currentTarget.onerror = null; e.currentTarget.src = "/brand-logo.jpg"; }}
                 />
 
                 {/* Rank Badge at Top-Right */}
