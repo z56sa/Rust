@@ -7,7 +7,7 @@ import witScheduleData from "@/data/witScheduleEnriched.json";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "مواعيد الحلقات | جدول صدور الأنميات الأسبوعي | رست أنمي",
+  title: "مواعيد الحلقات | جدول صدور الأنميات الأسبوعي | راست أنمي",
   description: "جدول مواعيد صدور حلقات مسلسلات الأنمي المستمرة لهذا الموسم مطابق تماماً لجدول مواعيد الحلقات المعتمد.",
 };
 

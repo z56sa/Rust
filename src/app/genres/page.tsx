@@ -6,7 +6,7 @@ import { Layers, Flame, Sparkles } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "تصنيفات الأنمي | رست أنمي",
+  title: "تصنيفات الأنمي | راست أنمي",
   description: "تصفح مسلسلات وأفلام الأنمي حسب التصنيف مثل أكشن، مغامرات، كوميديا، دراما، شونين، خيال والمزيد.",
 };
 

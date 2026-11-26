@@ -191,7 +191,7 @@ export default function AdminDashboardPage() {
         <div>
           <h1 className="text-2xl font-black text-white flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
-            لوحة تحكم رست أنمي (Rust Anime Admin Panel)
+            لوحة تحكم راست أنمي (Rust Anime Admin Panel)
           </h1>
           <p className="text-xs text-gray-400 mt-1">
             إدارة الأنميات، الحلقات، وسيرفرات البث مباشرة على قاعدة بيانات <span className="text-cyan-400 font-mono font-bold">Turso Cloud</span>

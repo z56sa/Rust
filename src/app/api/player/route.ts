@@ -302,7 +302,7 @@ export async function GET(req: NextRequest) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <title>رست أنمي - مشغل الفيديو المباشر (FHD)</title>
+  <title>راست أنمي - مشغل الفيديو المباشر (FHD)</title>
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -413,7 +413,7 @@ export async function GET(req: NextRequest) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <title>رست أنمي - مشغل الفيديو المباشر</title>
+  <title>راست أنمي - مشغل الفيديو المباشر</title>
   <style>
     * { box-sizing: border-box; }
     html, body {

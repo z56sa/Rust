@@ -15,7 +15,7 @@ export async function generateMetadata({
   const { name } = await params;
   const decoded = decodeURIComponent(name);
   return {
-    title: `أنميات تصنيف ${decoded} | رست أنمي`,
+    title: `أنميات تصنيف ${decoded} | راست أنمي`,
     description: `مشاهدة وتحميل أفضل مسلسلات وأفلام أنمي من تصنيف ${decoded} مترجمة بجودة عالية.`,
   };
 }
