@@ -6,7 +6,7 @@ import { Star, PlayCircle, Play } from "lucide-react";
 import { AnimeActionButtons } from "@/components/AnimeActionButtons";
 import { EpisodeThumbnail } from "@/components/EpisodeThumbnail";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function AnimeDetailPage({
   params,

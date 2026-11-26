@@ -12,7 +12,7 @@ import {
   animeVersionsList,
 } from "@/data/filterOptions";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function AnimeListPage({
   searchParams,

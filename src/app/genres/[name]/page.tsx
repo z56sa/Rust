@@ -5,7 +5,7 @@ import { AnimeCard } from "@/components/AnimeCard";
 import { Layers, ChevronRight, Film } from "lucide-react";
 import { Anime } from "@/data/animeData";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,

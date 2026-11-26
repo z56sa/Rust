@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getAllGenresWithCount } from "@/lib/animeService";
 import { Layers, Flame, Sparkles } from "lucide-react";
 
-export const revalidate = 120;
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "تصنيفات الأنمي | راست أنمي",
