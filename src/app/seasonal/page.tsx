@@ -4,7 +4,7 @@ import { getOngoingAnimesPaginated, getSeasonalPopularAnimes } from "@/lib/anime
 import { Star, Calendar } from "lucide-react";
 import { Pagination } from "@/components/Pagination";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function SeasonalPage({
   searchParams,

@@ -18,7 +18,7 @@ import { ContinueWatching } from "@/components/ContinueWatching";
 import { RankedSliderSection } from "@/components/RankedSliderSection";
 import { LatestMoviesSection } from "@/components/LatestMoviesSection";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function Home() {
   const [

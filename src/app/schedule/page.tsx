@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Star, LayoutGrid, List } from "lucide-react";
 import witScheduleData from "@/data/witScheduleEnriched.json";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata = {
   title: "مواعيد الحلقات | جدول صدور الأنميات الأسبوعي | راست أنمي",
