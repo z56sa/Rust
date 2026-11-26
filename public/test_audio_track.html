@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#000;color:#fff;">
+<h2>Testing Audio Tracks</h2>
+<video id="v" src="" controls playsinline></video>
+<div id="info">Loading...</div>
+<script>
+async function load() {
+  const res = await fetch("/api/player?slug=one-punch-man-season-2&ep=1");
+  const html = await res.text();
+  const m = html.match(/source src="([^"]+)"/);
+  if (m) {
+    const v = document.getElementById("v");
+    v.src = m[1];
+    v.onloadedmetadata = () => {
+      let info = "Duration: " + v.duration + "s<br>";
+      if (v.audioTracks) {
+        info += "Audio tracks count: " + v.audioTracks.length + "<br>";
+        for (let i = 0; i < v.audioTracks.length; i++) {
+          const t = v.audioTracks[i];
+          info += "Track " + i + ": lang=" + t.language + ", label=" + t.label + ", enabled=" + t.enabled + "<br>";
+        }
+      } else {
+        info += "audioTracks API not supported by browser<br>";
+      }
+      document.getElementById("info").innerHTML = info;
+    };
+  }
+}
+load();
+</script>
+</body>
+</html>

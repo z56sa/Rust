@@ -1,0 +1,74 @@
+[
+  {
+    "index": 0,
+    "title": "Black Clover 2nd Season",
+    "slug": "black-clover-2nd-season",
+    "banner": "item.poster",
+    "type": "TV",
+    "rating": 8.9,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  },
+  {
+    "index": 1,
+    "title": "Dragon Ball Super: Beerus",
+    "slug": "dragon-ball-super-beerus",
+    "banner": "https://images.witanime.site/banners/66d796f0132edb163805ab2c021ff0a5.jpg",
+    "type": "TV",
+    "rating": 8.3,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  },
+  {
+    "index": 2,
+    "title": "BLEACH: Sennen Kessen-hen - Kashin-tan -",
+    "slug": "bleach-sennen-kessen-hen-kashin-tan",
+    "banner": "https://images.witanime.site/banners/f80dfcb0fd0b77f1534c7be88e9fdc1c.jpg",
+    "type": "TV",
+    "rating": 8.8,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  },
+  {
+    "index": 3,
+    "title": "Kusuriya no Hitorigoto 3rd Season Cour 1",
+    "slug": "kusuriya-no-hitorigoto-3rd-season-cour-1",
+    "banner": "https://images.witanime.site/banners/2167e9ae04d821687ffdcea6a5eab4ae.jpg",
+    "type": "TV",
+    "rating": 8,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  },
+  {
+    "index": 4,
+    "title": "Tokyo Revengers: Santen Sensou-hen",
+    "slug": "tokyo-revengers-santen-sensou-hen",
+    "banner": "https://images.witanime.site/banners/8620977d063274efbf7cf3b88b09ed8f.jpg",
+    "type": "TV",
+    "rating": 7.8,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  },
+  {
+    "index": 5,
+    "title": "STEEL BALL RUN JoJo no Kimyou na Bouken",
+    "slug": "steel-ball-run-jojo-no-kimyou-na-bouken",
+    "banner": "https://images.witanime.site/banners/08336b33b9c86872d8f3e4c53a9dd786.jpg",
+    "type": "ONA",
+    "rating": 8.1,
+    "year": 2026,
+    "status": "مستمر",
+    "genres": "",
+    "synopsis": ""
+  }
+]
