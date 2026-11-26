@@ -18,9 +18,8 @@ export default async function WatchEpisodePage({
     notFound();
   }
 
-  // Fetch recommended animes
-  const allAnimes = await getAllAnimes();
-  const recommendedAnimes = allAnimes
+  // Fetch recommended animes (only 6 items, limited at database query level for speed)
+  const recommendedAnimes = (await getAllAnimes(7))
     .filter((a) => a.slug !== slug)
     .slice(0, 6)
     .map((a) => ({
