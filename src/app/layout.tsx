@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
+  verification: {
+    google: "JyC248VB5gSvCYFfiXT5wJW_ZnDMnm9B3HovB7fzBm8",
+  },
 };
 
 export default function RootLayout({
@@ -21,6 +24,7 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className="dark">
       <head>
         <meta name="referrer" content="no-referrer" />
+        <meta name="google-site-verification" content="JyC248VB5gSvCYFfiXT5wJW_ZnDMnm9B3HovB7fzBm8" />
       </head>
       <body className="bg-[#0b0c13] text-zinc-100 min-h-screen flex flex-col antialiased selection:bg-white selection:text-black">
         <Navbar />
