@@ -8,11 +8,11 @@ import { AdminNavLink } from "@/components/AdminNavLink";
 export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 bg-[#0e1017]/95 backdrop-blur-md border-b border-zinc-800/80 text-white">
-      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-2 sm:gap-4">
         {/* Right side: Logo + Navigation Links (exact WitAnime order & clean text) */}
-        <div className="flex items-center gap-7">
+        <div className="flex items-center gap-3 sm:gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <img
               src="/brand-logo.jpg?v=3"
               alt="انمي راست | AnimeRust"
@@ -22,7 +22,7 @@ export const Navbar = () => {
           </Link>
 
           {/* Navigation Links - Plain clean text without icons, exactly like WitAnime */}
-          <nav className="hidden md:flex items-center gap-5 text-sm font-semibold text-zinc-300">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-5 text-xs lg:text-sm font-semibold text-zinc-300 whitespace-nowrap">
             <Link href="/" className="hover:text-white transition-colors">
               الرئيسية
             </Link>
