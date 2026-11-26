@@ -13,13 +13,13 @@ export const Navbar = () => {
         <div className="flex items-center gap-7">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-white border border-zinc-700/80 flex items-center justify-center p-0.5 shadow-md group-hover:scale-105 transition">
+            <div className="relative w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center">
               <Image
                 src="/logo.png"
-                alt="راست أنمي - AnimeRust"
+                alt="انمي راست | AnimeRust"
                 width={36}
                 height={36}
-                className="object-contain w-full h-full"
+                className="w-full h-full object-cover rounded-lg"
                 priority
               />
             </div>
