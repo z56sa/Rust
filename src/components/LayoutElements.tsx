@@ -67,7 +67,7 @@ export const Footer = () => {
             <span className="font-bold text-lg text-white">ANIME</span>
           </div>
           <p className="text-xs text-zinc-500 max-w-md">
-            موقع رست أنمي (Rust Anime) وجهتك المثالية لمشاهدة وتحميل أحدث مسلسلات وأفلام الأنمي المترجمة بجودة عالية.
+            موقع انمي راست (AnimeRust) وجهتك المثالية لمتابعة واستكشاف محتوى الأنمي المترجم بسهولة وسرعة.
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-6 text-xs font-medium">

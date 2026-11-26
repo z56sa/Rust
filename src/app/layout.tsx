@@ -3,8 +3,8 @@ import "./globals.css";
 import { Navbar, Footer } from "@/components/LayoutElements";
 
 export const metadata: Metadata = {
-  title: "انمي راست | AnimeRust - مشاهدة وتحميل الأنمي المترجم بجودة عالية",
-  description: "موقع انمي راست (AnimeRust) لمشاهدة وتحميل أحدث مسلسلات وأفلام الأنمي المترجمة أون لاين بجودة عالية FHD وسيرفرات سريعة وبدون إعلانات مزعجة.",
+  title: "انمي راست | AnimeRust - منصة الأنمي",
+  description: "مرحباً بكم في انمي راست (AnimeRust) - استكشف وتابع محتوى الأنمي بسهولة وسرعة عبر منصة انمي راست.",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
