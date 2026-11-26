@@ -13,12 +13,10 @@ export const Navbar = () => {
         <div className="flex items-center gap-7">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/logo.png"
+            <img
+              src="/brand-logo.jpg?v=3"
               alt="انمي راست | AnimeRust"
-              width={36}
-              height={36}
-              priority
+              className="w-9 h-9 object-cover rounded-lg shadow border border-zinc-800"
             />
             <span className="font-black text-lg tracking-wide text-white">RUSTANIME</span>
           </Link>
