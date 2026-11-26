@@ -184,6 +184,16 @@ export default async function Home() {
         </aside>
 
       </div>
+
+      {/* قسم تعريفي - انمي راست | AnimeRust (SEO & Description) */}
+      <section className="bg-gradient-to-r from-zinc-900/90 via-zinc-900/50 to-zinc-950/90 border border-zinc-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-sm text-right">
+        <h1 className="text-xl sm:text-2xl font-bold text-white mb-3">
+          موقع انمي راست | AnimeRust - وجهتك الأولى لمشاهدة الأنمي المترجم
+        </h1>
+        <p className="text-sm sm:text-base text-zinc-300 leading-relaxed max-w-4xl">
+          أهلاً بكم في <strong className="text-rose-500 font-semibold">انمي راست</strong> (<span className="text-white font-semibold">AnimeRust</span> / <span className="text-white font-semibold">animerust</span>)، بوابتك المتكاملة لمشاهدة وتحميل أحدث حلقات ومسلسلات وأفلام الأنمي المترجمة باللغة العربية بأعلى جودة <span className="text-zinc-200 font-medium">FHD</span>. يمنحكم <strong className="text-rose-400">انمي راست</strong> تجربة فريدة مع مشغل فيديو فائق السرعة وخالٍ من الإعلانات المزعجة، مع تحديث مستمر لجميع أنميات الموسم والأنميات الأسطورية وقوائم المشاهدة اليومية.
+        </p>
+      </section>
     </div>
   );
 }

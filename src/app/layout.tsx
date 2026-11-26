@@ -3,8 +3,8 @@ import "./globals.css";
 import { Navbar, Footer } from "@/components/LayoutElements";
 
 export const metadata: Metadata = {
-  title: "رست أنمي | Rust Anime - مشاهدة وتحميل الأنمي المترجم بجودة عالية",
-  description: "موقع رست أنمي (Rust Anime) لمتابعة جديد الحلقات والمسلسلات والأفلام بأعلى جودة وسيرفرات سريعة.",
+  title: "انمي راست | AnimeRust - مشاهدة وتحميل الأنمي المترجم بجودة عالية",
+  description: "موقع انمي راست (AnimeRust) لمشاهدة وتحميل أحدث مسلسلات وأفلام الأنمي المترجمة أون لاين بجودة عالية FHD وسيرفرات سريعة وبدون إعلانات مزعجة.",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
