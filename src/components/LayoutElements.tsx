@@ -12,14 +12,14 @@ export const Navbar = () => {
         {/* Right side: Logo + Navigation Links (exact WitAnime order & clean text) */}
         <div className="flex items-center gap-7">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-black border border-zinc-800 flex items-center justify-center">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-white border border-zinc-700/80 flex items-center justify-center p-0.5 shadow-md group-hover:scale-105 transition">
               <Image
                 src="/logo.png"
-                alt="Rust Anime Logo"
+                alt="راست أنمي - AnimeRust"
                 width={36}
                 height={36}
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full"
                 priority
               />
             </div>
