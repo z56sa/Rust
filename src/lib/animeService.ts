@@ -304,8 +304,21 @@ export async function getLatestEpisodesWithAnime(limitCount = 18) {
 // Fetch single anime by slug
 export async function getAnimeBySlug(slug: string) {
   try {
-    const animeList = await db.select().from(animes).where(eq(animes.slug, slug)).limit(1);
-    if (!animeList.length) return null;
+    let animeList = await db.select().from(animes).where(eq(animes.slug, slug)).limit(1);
+    if (!animeList.length) {
+      // Smart Fallback to prevent 404 on any slug variants
+      const baseSlug = slug.replace(/-[0-9]+$/, "");
+      const altList = await db
+        .select()
+        .from(animes)
+        .where(or(sql`slug LIKE ${baseSlug + "%"}`, sql`slug LIKE ${"%" + baseSlug}`))
+        .limit(1);
+      if (altList.length) {
+        animeList = altList;
+      } else {
+        return null;
+      }
+    }
 
     const animeItem = animeList[0];
     const episodeList = await db
@@ -336,7 +349,11 @@ export async function getEpisodeWithServers(slug: string, episodeNumber: number)
     const animeData = await getAnimeBySlug(slug);
     if (!animeData) return null;
 
-    const episodeItem = animeData.episodes.find((ep) => ep.number === episodeNumber);
+    let episodeItem = animeData.episodes.find((ep) => ep.number === episodeNumber);
+    // If exact episodeNumber not found, fallback to first available episode so user NEVER gets 404
+    if (!episodeItem && animeData.episodes.length > 0) {
+      episodeItem = animeData.episodes[0];
+    }
     if (!episodeItem) return null;
 
     const [servers, downloads] = await Promise.all([
