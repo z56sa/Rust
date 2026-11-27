@@ -129,8 +129,9 @@ export default async function AnimeDetailPage({
         </div>
 
         {anime.episodes.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 bg-[#121520] rounded-xl border border-gray-800">
-            لم يتم رفع حلقات لهذا الأنمي بعد. يمكنك إضافة حلقات من لوحة التحكم (Admin).
+          <div className="p-8 text-center text-gray-400 bg-[#121520] rounded-xl border border-gray-800 space-y-2">
+            <p className="text-base font-semibold text-white">الأنمي لم يُعرض بعد أو لم تصدر حلقاته رسميًا</p>
+            <p className="text-xs text-gray-500">سيتم إضافة الحلقات وتوفير سيرفرات المشاهدة فور صدورها وبثها رسمياً.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
