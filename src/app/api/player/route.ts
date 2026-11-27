@@ -19,7 +19,7 @@ const SLAYER_HEADERS = {
   "Client-Id": SLAYER_CLIENT_ID,
   "Client-Secret": SLAYER_CLIENT_SECRET,
   "Accept": "application/json",
-  "User-Agent": "AnimeSlayer/1.5.10 (Linux; U; Android 13; SM-G998B)",
+  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
 };
 
 // Complete Slayer ID Mapping for all 174 animes (Original Japanese Audio + Arabic Hardsubs)
