@@ -412,7 +412,6 @@ export async function GET(req: NextRequest) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer">
   <title>راست أنمي - مشغل الفيديو المباشر</title>
   <style>
     * { box-sizing: border-box; }
@@ -480,7 +479,6 @@ export async function GET(req: NextRequest) {
           id="player-frame"
           src="${streamUrl}"
           allowfullscreen
-          referrerpolicy="no-referrer"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         ></iframe>`
       : `<div class="fallback-box">
