@@ -114,8 +114,7 @@ export default function WatchPlayer({
                 src={activeServer.url}
                 className="w-full h-full border-0"
                 allowFullScreen
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                referrerPolicy="no-referrer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 title={`الحلقة ${currentEpisode}`}
               />
             ) : (

@@ -38,11 +38,24 @@ export default async function WatchEpisodePage({
     duration: e.duration || "24 دقيقة",
   }));
 
-  const servers = (data.episode.servers || []).map((s) => ({
-    name: s.name,
-    url: s.url,
-    quality: s.quality || "1080p",
-  }));
+  // Generate robust multi-server options for immediate reliability
+  const servers = [
+    {
+      name: "سيرفر RUST 1 (FHD مباشر)",
+      url: `/api/player?slug=${data.anime.slug}&ep=${data.episode.number}`,
+      quality: "1080p",
+    },
+    {
+      name: "سيرفر RUST 2 (احتياطي)",
+      url: `/api/player?slug=${data.anime.slug}&ep=${data.episode.number}&srv=2`,
+      quality: "1080p",
+    },
+    {
+      name: "سيرفر RUST 3 (سريع)",
+      url: `/api/player?slug=${data.anime.slug}&ep=${data.episode.number}&srv=3`,
+      quality: "720p",
+    },
+  ];
 
   return (
     <div className="py-6 px-2 sm:px-4 max-w-7xl mx-auto">

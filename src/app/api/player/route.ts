@@ -240,18 +240,28 @@ export async function GET(req: NextRequest) {
 
   // If specific server index requested:
   if (srv === "2") {
-    // 2Embed / VidSrc Multi
+    // MultiEmbed (Fast, high-uptime multi-source player with Japanese/Arabic/English)
+    const tmdbEntry = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
+    if (tmdbEntry) {
+      streamUrl = `https://multiembed.mov/?video_id=${tmdbEntry.tmdb}&tmdb=1&s=${tmdbEntry.season}&e=${ep}`;
+    } else {
+      let malId: number | undefined = rawMal ? Number(rawMal) : undefined;
+      if (!malId && slug) malId = (animeMalMap as Record<string, number>)[slug];
+      if (malId) {
+        streamUrl = `https://www.2embed.cc/embed/anime/${malId}/${ep}`;
+      }
+    }
+  } else if (srv === "3") {
+    // 2Embed / VidSrc alternative
     let malId: number | undefined = rawMal ? Number(rawMal) : undefined;
     if (!malId && slug) malId = (animeMalMap as Record<string, number>)[slug];
     if (malId) {
       streamUrl = `https://www.2embed.cc/embed/anime/${malId}/${ep}`;
-    }
-  } else if (srv === "3") {
-    // VidLink with clean search title
-    let malId: number | undefined = rawMal ? Number(rawMal) : undefined;
-    if (!malId && slug) malId = (animeMalMap as Record<string, number>)[slug];
-    if (malId) {
-      streamUrl = `https://vidlink.pro/anime/${malId}/${ep}/1?sub=ara&subtitles=Arabic`;
+    } else {
+      const tmdbEntry = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
+      if (tmdbEntry) {
+        streamUrl = `https://multiembed.mov/?video_id=${tmdbEntry.tmdb}&tmdb=1&s=${tmdbEntry.season}&e=${ep}`;
+      }
     }
   }
 
@@ -274,21 +284,21 @@ export async function GET(req: NextRequest) {
     }
   }
 
-  // 3. Fallback: High quality anime player with Japanese audio + subtitles priority
+  // 3. Fallback: MultiEmbed / VidSrc with Japanese audio + subtitles
   if (!streamUrl) {
     const tmdbEntry = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
     if (tmdbEntry) {
-      streamUrl = `https://vidsrc.pm/embed/tv/${tmdbEntry.tmdb}/${tmdbEntry.season}/${ep}`;
+      streamUrl = `https://multiembed.mov/?video_id=${tmdbEntry.tmdb}&tmdb=1&s=${tmdbEntry.season}&e=${ep}`;
     } else {
       let malId: number | undefined = rawMal ? Number(rawMal) : undefined;
       if (!malId && slug) {
         malId = (animeMalMap as Record<string, number>)[slug];
       }
       if (malId) {
-        streamUrl = `https://vidsrc.pm/embed/anime/${malId}/${ep}/1`;
+        streamUrl = `https://www.2embed.cc/embed/anime/${malId}/${ep}`;
       } else {
         const cleanTitle = slug.replace(/-(?:19|20)\d{2}.*$/, "").replace(/-/g, " ");
-        streamUrl = `https://vidsrc.pm/embed/anime/${encodeURIComponent(cleanTitle)}/${ep}/1`;
+        streamUrl = `https://multiembed.mov/?video_id=${encodeURIComponent(cleanTitle)}&tmdb=1&s=1&e=${ep}`;
       }
     }
   }
