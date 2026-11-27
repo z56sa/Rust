@@ -15,10 +15,10 @@ interface AnimeItem {
   slug: string;
   title: string;
   poster: string;
-  type: string;
-  rating: string;
-  releaseYear: number;
-  latestEpisode: number;
+  type?: string;
+  rating?: string;
+  releaseYear?: number;
+  latestEpisode?: number;
 }
 
 interface DayData {
@@ -30,7 +30,7 @@ interface DayData {
 }
 
 export default async function SchedulePage() {
-  const schedule = witScheduleData as Record<string, DayData>;
+  const schedule = witScheduleData as unknown as Record<string, DayData>;
 
   // Start with Today first (الأربعاء / Wednesday) matching WitAnime sequence
   const orderedDays = ["الأربعاء", "الخميس", "الجمعة", "السبت", "الأحد", "الإثنين", "الثلاثاء"];
