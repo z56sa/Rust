@@ -285,7 +285,7 @@ export async function GET(req: NextRequest) {
         malId = (animeMalMap as Record<string, number>)[slug];
       }
       if (malId) {
-        streamUrl = `https://www.2embed.cc/embed/anime/${malId}/${ep}`;
+        streamUrl = `https://vidlink.pro/anime/${malId}/${ep}/1?sub=ara&subtitles=Arabic`;
       } else {
         // Safe dynamic fallback: search vidlink using title or slug rather than a hardcoded foreign anime ID
         const cleanTitle = slug.replace(/-(?:19|20)\d{2}.*$/, "").replace(/-/g, " ");
