@@ -301,9 +301,18 @@ export async function getLatestEpisodesWithAnime(limitCount = 18) {
   return [];
 }
 
+// SLUG ALIASES: map newly released/cour-specific or seasonal slugs directly to canonical DB anime
+const SLUG_ALIASES: Record<string, string> = {
+  "black-clover-2nd-season": "black-clover",
+  "bleach-sennen-kessen-hen-kashin-tan": "bleach-sennen-kessen-hen-soukoku-tan-48015",
+  "bleach-sennen-kessen-hen-soukoku-tan": "bleach-sennen-kessen-hen-soukoku-tan-48015",
+  "meitantei-conan-movie-29-highway-no-datenshi": "detective-conan",
+};
+
 // Fetch single anime by slug
-export async function getAnimeBySlug(slug: string) {
+export async function getAnimeBySlug(rawSlug: string) {
   try {
+    const slug = SLUG_ALIASES[rawSlug] || rawSlug;
     let animeList = await db.select().from(animes).where(eq(animes.slug, slug)).limit(1);
     if (!animeList.length) {
       // Smart Fallback to prevent 404 on any slug variants
