@@ -139,8 +139,8 @@ export default async function SchedulePage() {
                         </span>
 
                         {/* Episode Badge */}
-                        <span className="h-5 sm:h-6 rounded-md bg-black/75 px-2 text-[10px] sm:text-xs font-bold leading-5 sm:leading-6 text-white backdrop-blur-sm border border-white/10 shadow-sm">
-                          الحلقة {anime.latestEpisode}
+                        <span className="h-5 sm:h-6 rounded-md bg-black/75 px-2 text-[10px] sm:text-xs font-bold leading-5 sm:leading-6 text-zinc-300 backdrop-blur-sm border border-white/10 shadow-sm">
+                          {anime.latestEpisode ? `الحلقة ${anime.latestEpisode}` : "قريباً"}
                         </span>
                       </div>
 
