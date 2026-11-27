@@ -278,18 +278,17 @@ export async function GET(req: NextRequest) {
   if (!streamUrl) {
     const tmdbEntry = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
     if (tmdbEntry) {
-      streamUrl = `https://vidlink.pro/tv/${tmdbEntry.tmdb}/${tmdbEntry.season}/${ep}?sub=ara&subtitles=Arabic`;
+      streamUrl = `https://vidsrc.pm/embed/tv/${tmdbEntry.tmdb}/${tmdbEntry.season}/${ep}`;
     } else {
       let malId: number | undefined = rawMal ? Number(rawMal) : undefined;
       if (!malId && slug) {
         malId = (animeMalMap as Record<string, number>)[slug];
       }
       if (malId) {
-        streamUrl = `https://vidlink.pro/anime/${malId}/${ep}/1?sub=ara&subtitles=Arabic`;
+        streamUrl = `https://vidsrc.pm/embed/anime/${malId}/${ep}/1`;
       } else {
-        // Safe dynamic fallback: search vidlink using title or slug rather than a hardcoded foreign anime ID
         const cleanTitle = slug.replace(/-(?:19|20)\d{2}.*$/, "").replace(/-/g, " ");
-        streamUrl = `https://vidlink.pro/anime/${encodeURIComponent(cleanTitle)}/${ep}/1?sub=ara&subtitles=Arabic`;
+        streamUrl = `https://vidsrc.pm/embed/anime/${encodeURIComponent(cleanTitle)}/${ep}/1`;
       }
     }
   }
