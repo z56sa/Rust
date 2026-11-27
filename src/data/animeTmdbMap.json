@@ -1,30 +1,122 @@
 {
-  "one-punch-man": { "tmdb": 63926, "season": 1 },
-  "one-punch-man-season-2": { "tmdb": 63926, "season": 2 },
-  "solo-leveling": { "tmdb": 127532, "season": 1 },
-  "solo-leveling-season-2": { "tmdb": 127532, "season": 2 },
-  "attack-on-titan": { "tmdb": 1429, "season": 1 },
-  "attack-on-titan-season-2": { "tmdb": 1429, "season": 2 },
-  "attack-on-titan-season-3": { "tmdb": 1429, "season": 3 },
-  "attack-on-titan-final-season": { "tmdb": 1429, "season": 4 },
-  "jujutsu-kaisen": { "tmdb": 95479, "season": 1 },
-  "jujutsu-kaisen-season-2": { "tmdb": 95479, "season": 2 },
-  "demon-slayer": { "tmdb": 85937, "season": 1 },
-  "demon-slayer-mugen-train-tv": { "tmdb": 85937, "season": 2 },
-  "demon-slayer-entertainment-district": { "tmdb": 85937, "season": 3 },
-  "demon-slayer-swordsmith-village": { "tmdb": 85937, "season": 4 },
-  "demon-slayer-hashira-training": { "tmdb": 85937, "season": 5 },
-  "death-note": { "tmdb": 13916, "season": 1 },
-  "hunter-x-hunter-2011": { "tmdb": 46298, "season": 1 },
-  "naruto-shippuden": { "tmdb": 31910, "season": 1 },
-  "one-piece": { "tmdb": 37854, "season": 1 },
-  "bleach": { "tmdb": 30984, "season": 1 },
-  "chainsaw-man": { "tmdb": 114410, "season": 1 },
-  "vinland-saga": { "tmdb": 89088, "season": 1 },
-  "vinland-saga-season-2": { "tmdb": 89088, "season": 2 },
-  "my-hero-academia": { "tmdb": 65930, "season": 1 },
-  "tokyo-ghoul": { "tmdb": 61374, "season": 1 },
-  "dr-stone": { "tmdb": 86031, "season": 1 },
-  "black-clover": { "tmdb": 74204, "season": 1 },
-  "fullmetal-alchemist-brotherhood": { "tmdb": 31911, "season": 1 }
+  "one-punch-man": {
+    "tmdb": 63926,
+    "season": 1
+  },
+  "one-punch-man-season-2": {
+    "tmdb": 63926,
+    "season": 2
+  },
+  "solo-leveling": {
+    "tmdb": 127532,
+    "season": 1
+  },
+  "solo-leveling-season-2": {
+    "tmdb": 127532,
+    "season": 2
+  },
+  "attack-on-titan": {
+    "tmdb": 1429,
+    "season": 1
+  },
+  "attack-on-titan-season-2": {
+    "tmdb": 1429,
+    "season": 2
+  },
+  "attack-on-titan-season-3": {
+    "tmdb": 1429,
+    "season": 3
+  },
+  "attack-on-titan-final-season": {
+    "tmdb": 1429,
+    "season": 4
+  },
+  "jujutsu-kaisen": {
+    "tmdb": 95479,
+    "season": 1
+  },
+  "jujutsu-kaisen-season-2": {
+    "tmdb": 95479,
+    "season": 2
+  },
+  "demon-slayer": {
+    "tmdb": 85937,
+    "season": 1
+  },
+  "demon-slayer-mugen-train-tv": {
+    "tmdb": 85937,
+    "season": 2
+  },
+  "demon-slayer-entertainment-district": {
+    "tmdb": 85937,
+    "season": 3
+  },
+  "demon-slayer-swordsmith-village": {
+    "tmdb": 85937,
+    "season": 4
+  },
+  "demon-slayer-hashira-training": {
+    "tmdb": 85937,
+    "season": 5
+  },
+  "death-note": {
+    "tmdb": 13916,
+    "season": 1
+  },
+  "hunter-x-hunter-2011": {
+    "tmdb": 46298,
+    "season": 1
+  },
+  "naruto-shippuden": {
+    "tmdb": 31910,
+    "season": 1
+  },
+  "one-piece": {
+    "tmdb": 37854,
+    "season": 1
+  },
+  "bleach": {
+    "tmdb": 30984,
+    "season": 1
+  },
+  "chainsaw-man": {
+    "tmdb": 114410,
+    "season": 1
+  },
+  "vinland-saga": {
+    "tmdb": 89088,
+    "season": 1
+  },
+  "vinland-saga-season-2": {
+    "tmdb": 89088,
+    "season": 2
+  },
+  "my-hero-academia": {
+    "tmdb": 65930,
+    "season": 1
+  },
+  "tokyo-ghoul": {
+    "tmdb": 61374,
+    "season": 1
+  },
+  "dr-stone": {
+    "tmdb": 86031,
+    "season": 1
+  },
+  "black-clover": {
+    "tmdb": 74204,
+    "season": 1
+  },
+  "fullmetal-alchemist-brotherhood": {
+    "tmdb": 31911,
+    "season": 1
+  },
+  "bleach-sennen-kessen-hen": {
+    "tmdb": 30984,
+    "season": 17
+  },
+  "bleach-sennen-kessen-hen-kashin-tan": {
+    "tmdb": 30984,
+    "season": 17
+  }
 }
