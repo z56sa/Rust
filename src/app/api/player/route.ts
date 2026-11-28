@@ -307,6 +307,9 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  let streamUrl = "";
+  let isDirectVideo = false;
+
   // If specific server index requested:
   if (srv === "2") {
     // MultiEmbed (Fast, high-uptime multi-source player with Japanese/Arabic/English)
