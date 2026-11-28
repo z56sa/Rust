@@ -1,7 +1,7 @@
-import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
+import { pgTable, text, integer, real, doublePrecision } from "drizzle-orm/pg-core";
 
 // جدول الأنميات
-export const animes = sqliteTable("animes", {
+export const animes = pgTable("animes", {
   id: text("id").primaryKey(),
   slug: text("slug").notNull().unique(),
   title: text("title").notNull(),
@@ -9,7 +9,7 @@ export const animes = sqliteTable("animes", {
   synopsis: text("synopsis"),
   poster: text("poster").notNull(),
   banner: text("banner").notNull(),
-  rating: real("rating").default(0),
+  rating: doublePrecision("rating").default(0),
   genres: text("genres").notNull(), // JSON string
   status: text("status").notNull().default("مستمر"),
   type: text("type").notNull().default("TV"),
@@ -23,22 +23,22 @@ export const animes = sqliteTable("animes", {
 });
 
 // جدول الحلقات مع دعم الفلر (isFiller)
-export const episodes = sqliteTable("episodes", {
+export const episodes = pgTable("episodes", {
   id: text("id").primaryKey(),
   animeId: text("anime_id")
     .notNull()
     .references(() => animes.id, { onDelete: "cascade" }),
-  number: real("number").notNull(), // real to support 7.5 etc
+  number: doublePrecision("number").notNull(),
   title: text("title").notNull(),
   thumbnail: text("thumbnail"),
   releaseDate: text("release_date"),
   duration: text("duration").default("24 دقيقة"),
-  isFiller: integer("is_filler").default(0), // 1 = فلر, 0 = قصة أصلية (كانون)
+  isFiller: integer("is_filler").default(0),
   createdAt: text("created_at").default("CURRENT_TIMESTAMP"),
 });
 
 // جدول سيرفرات المشاهدة
-export const episodeServers = sqliteTable("episode_servers", {
+export const episodeServers = pgTable("episode_servers", {
   id: text("id").primaryKey(),
   episodeId: text("episode_id")
     .notNull()
@@ -49,7 +49,7 @@ export const episodeServers = sqliteTable("episode_servers", {
 });
 
 // جدول روابط التحميل المباشرة
-export const downloadLinks = sqliteTable("download_links", {
+export const downloadLinks = pgTable("download_links", {
   id: text("id").primaryKey(),
   episodeId: text("episode_id")
     .notNull()
@@ -60,21 +60,21 @@ export const downloadLinks = sqliteTable("download_links", {
 });
 
 // جدول المستخدمين والحسابات
-export const users = sqliteTable("users", {
+export const users = pgTable("users", {
   id: text("id").primaryKey(),
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
   name: text("name").notNull(),
-  role: text("role").notNull().default("user"), // 'admin' | 'user'
+  role: text("role").notNull().default("user"),
   avatar: text("avatar"),
   createdAt: text("created_at").default("CURRENT_TIMESTAMP"),
 });
 
-// جدول قائمة الأنميات للمستخدم (أشاهده، أنوي مشاهدته، أكملته، المفضلة)
-export const userLists = sqliteTable("user_lists", {
+// جدول قائمة الأنميات للمستخدم
+export const userLists = pgTable("user_lists", {
   id: text("id").primaryKey(),
   userId: text("user_id").notNull(),
   animeId: text("anime_id").notNull(),
-  status: text("status").notNull(), // 'watching' | 'plan' | 'completed' | 'favorite'
+  status: text("status").notNull(),
   createdAt: text("created_at").default("CURRENT_TIMESTAMP"),
 });
