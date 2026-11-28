@@ -43,11 +43,16 @@ async function resolveSlayerStream(slug: string, epNum: number): Promise<string 
   const cacheKey = `slayer_${slug}_${epNum}`;
   const cached = streamCache.get(cacheKey);
   if (cached && Date.now() - cached.time < CACHE_TTL) {
+    console.log(`[Slayer] Cache HIT for ${slug} ep${epNum}`);
     return cached.url;
   }
 
+  console.log(`[Slayer] Starting resolution: slug=${slug} ep=${epNum}`);
+
   try {
     let slayerAnimeId = SLAYER_ANIME_MAP[slug];
+    console.log(`[Slayer] Direct map lookup: slayerAnimeId=${slayerAnimeId ?? "NOT FOUND"}`);
+
     if (!slayerAnimeId) {
       // Smart Multi-Strategy Dynamic Search
       const strippedYear = slug.replace(/-(?:19|20)\d{2}.*$/, "");
@@ -59,16 +64,20 @@ async function resolveSlayerStream(slug: string, epNum: number): Promise<string 
         words.slice(0, 2).join(" "),
       ];
 
+      console.log(`[Slayer] Dynamic search candidates:`, searchCandidates);
+
       for (const cand of searchCandidates) {
         if (!cand || cand.length < 2) continue;
         const searchPayload = JSON.stringify({ list_type: "anime_list", anime_name: cand, limit: 10 });
         const searchRes = await fetch(
           `${SLAYER_BASE_URL}animes/get-published-animes?json=${encodeURIComponent(searchPayload)}`,
-          { headers: SLAYER_HEADERS, signal: AbortSignal.timeout(3000) }
+          { headers: SLAYER_HEADERS, signal: AbortSignal.timeout(6000) }
         );
+        console.log(`[Slayer] Search "${cand}" => status=${searchRes.status}`);
         if (searchRes.ok) {
           const json = await searchRes.json();
           const hits = json.response?.data || [];
+          console.log(`[Slayer] Search "${cand}" => hits=${hits.length}`);
           if (hits.length > 0) {
             // Find closest match or first hit
             const match = hits.find(
@@ -77,45 +86,73 @@ async function resolveSlayerStream(slug: string, epNum: number): Promise<string 
                 cand.toLowerCase().includes(h.anime_name.toLowerCase())
             ) || hits[0];
             slayerAnimeId = match.anime_id;
+            console.log(`[Slayer] Dynamic match: "${match.anime_name}" => id=${slayerAnimeId}`);
             break;
           }
         }
       }
     }
 
-    if (!slayerAnimeId) return null;
+    if (!slayerAnimeId) {
+      console.log(`[Slayer] FAILED: No anime ID found for slug=${slug}`);
+      return null;
+    }
 
     // Fetch episodes for this anime
+    console.log(`[Slayer] Fetching details for animeId=${slayerAnimeId}...`);
     const detailsRes = await fetch(
       `${SLAYER_BASE_URL}anime/get-anime-details?anime_id=${slayerAnimeId}&fetch_episodes=Yes&more_info=No`,
-      { headers: SLAYER_HEADERS, signal: AbortSignal.timeout(4000) }
+      { headers: SLAYER_HEADERS, signal: AbortSignal.timeout(8000) }
     );
-    if (!detailsRes.ok) return null;
+    console.log(`[Slayer] detailsRes status=${detailsRes.status}`);
+    if (!detailsRes.ok) {
+      console.log(`[Slayer] FAILED: details fetch not ok`);
+      return null;
+    }
     const detailsJson = await detailsRes.json();
     const eps = detailsJson.response?.episodes?.data || detailsJson.response?.episodes || [];
+    console.log(`[Slayer] Episodes count=${eps.length}`);
 
     const targetEp = eps.find((e: any) => String(e.episode_number) === String(epNum));
-    if (!targetEp) return null;
+    if (!targetEp) {
+      console.log(`[Slayer] FAILED: ep ${epNum} not found in episodes list`);
+      return null;
+    }
+    console.log(`[Slayer] Target ep found: ep_id=${targetEp.episode_id}`);
 
     const cdnUrl = targetEp.episode_urls?.find((u: any) => u.episode_server_name === "cdn")?.episode_url;
-    if (!cdnUrl) return null;
+    if (!cdnUrl) {
+      console.log(`[Slayer] FAILED: no cdn URL in ep urls:`, JSON.stringify(targetEp.episode_urls?.map((u:any)=>u.episode_server_name)));
+      return null;
+    }
+    console.log(`[Slayer] CDN URL found: ${cdnUrl.substring(0, 80)}...`);
 
     const parsed = new URL(cdnUrl);
     const fVal = parsed.searchParams.get("f");
     const eVal = parsed.searchParams.get("e");
-    if (!fVal || !eVal) return null;
+    if (!fVal || !eVal) {
+      console.log(`[Slayer] FAILED: missing f/e params in CDN URL`);
+      return null;
+    }
 
     // 1. Fetch dynamic google.php seed
+    console.log(`[Slayer] Fetching google.php seed...`);
     const seedRes = await fetch(`${SLAYER_BASE_URL}google.php`, {
       headers: SLAYER_HEADERS,
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(6000),
     });
-    if (!seedRes.ok) return null;
+    console.log(`[Slayer] google.php status=${seedRes.status}`);
+    if (!seedRes.ok) {
+      console.log(`[Slayer] FAILED: google.php not ok`);
+      return null;
+    }
     const seed = (await seedRes.text()).trim();
+    console.log(`[Slayer] seed="${seed}" len=${seed.length}`);
 
     // 2. Derive AES Key
     const keyStr = (seed.slice(0, 10) + SLAYER_APK_CERT.slice(0, 22)).slice(0, 16);
     const keyBytes = Buffer.from(keyStr, "utf-8");
+    console.log(`[Slayer] AES key derived (len=${keyStr.length})`);
 
     // 3. Encrypt compact native payload
     const nativeJson = JSON.stringify({
@@ -132,21 +169,34 @@ async function resolveSlayerStream(slug: string, epNum: number): Promise<string 
     const infStr = JSON.stringify({ a: b64Enc, b: seed });
 
     // 4. POST to v-qs.php
+    console.log(`[Slayer] Posting to v-qs.php...`);
     const body = new URLSearchParams({ f: fVal, e: eVal, inf: infStr });
     const vqsRes = await fetch(`${SLAYER_BASE_URL}v-qs.php`, {
       method: "POST",
       headers: { ...SLAYER_HEADERS, "Content-Type": "application/x-www-form-urlencoded" },
       body: body.toString(),
-      signal: AbortSignal.timeout(4000),
+      signal: AbortSignal.timeout(8000),
     });
 
-    if (!vqsRes.ok) return null;
+    console.log(`[Slayer] v-qs.php status=${vqsRes.status}`);
+    if (!vqsRes.ok) {
+      console.log(`[Slayer] FAILED: v-qs.php not ok`);
+      return null;
+    }
     const rawB64 = (await vqsRes.text()).trim();
-    if (!rawB64) return null;
+    console.log(`[Slayer] rawB64 length=${rawB64.length} preview=${rawB64.substring(0,30)}`);
+    if (!rawB64) {
+      console.log(`[Slayer] FAILED: empty v-qs response`);
+      return null;
+    }
 
     // 5. Decrypt RNCryptor v3 envelope
     const envelope = Buffer.from(rawB64, "base64");
-    if (envelope.length <= 66) return null;
+    console.log(`[Slayer] envelope length=${envelope.length}`);
+    if (envelope.length <= 66) {
+      console.log(`[Slayer] FAILED: envelope too short`);
+      return null;
+    }
 
     const encSalt = envelope.subarray(2, 10);
     const iv = envelope.subarray(18, 34);
@@ -159,16 +209,21 @@ async function resolveSlayerStream(slug: string, epNum: number): Promise<string 
     const decrypted = pkcs7Unpad(decryptedPadded);
     const streamList = JSON.parse(decrypted.toString("utf-8"));
 
+    console.log(`[Slayer] Decrypted streamList count=${Array.isArray(streamList) ? streamList.length : "NOT ARRAY"}`);
+
     if (Array.isArray(streamList) && streamList.length > 0) {
       // Pick highest quality (last item or h.mp4)
       const highStream = streamList.find((s: any) => s.file && s.file.includes("/h.mp4")) || streamList[streamList.length - 1];
       if (highStream?.file) {
+        console.log(`[Slayer] SUCCESS: stream URL=${highStream.file.substring(0,60)}...`);
         streamCache.set(cacheKey, { url: highStream.file, time: Date.now() });
         return highStream.file;
       }
     }
+
+    console.log(`[Slayer] FAILED: no valid file in streamList`);
   } catch (err: any) {
-    console.error("Slayer resolution error:", err?.message);
+    console.error(`[Slayer] EXCEPTION slug=${slug} ep=${epNum}:`, err?.message);
   }
 
   return null;
@@ -261,6 +316,18 @@ export async function GET(req: NextRequest) {
       const tmdbEntry = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
       if (tmdbEntry) {
         streamUrl = `https://multiembed.mov/?video_id=${tmdbEntry.tmdb}&tmdb=1&s=${tmdbEntry.season}&e=${ep}`;
+      }
+    }
+  } else if (srv === "4") {
+    // VidSrc.pm — reliable fallback with high uptime
+    const tmdbEntry4 = (animeTmdbMap as Record<string, { tmdb: number; season: number }>)[slug];
+    if (tmdbEntry4) {
+      streamUrl = `https://vidsrc.pm/embed/tv/${tmdbEntry4.tmdb}/${tmdbEntry4.season}-${ep}`;
+    } else {
+      let malId4: number | undefined = rawMal ? Number(rawMal) : undefined;
+      if (!malId4 && slug) malId4 = (animeMalMap as Record<string, number>)[slug];
+      if (malId4) {
+        streamUrl = `https://vidsrc.pm/embed/anime/${malId4}/${ep}`;
       }
     }
   }

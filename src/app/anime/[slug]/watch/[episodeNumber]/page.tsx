@@ -55,6 +55,11 @@ export default async function WatchEpisodePage({
       url: `/api/player?slug=${data.anime.slug}&ep=${data.episode.number}&srv=3`,
       quality: "720p",
     },
+    {
+      name: "سيرفر VidPrime (جودة عالية)",
+      url: `/api/player?slug=${data.anime.slug}&ep=${data.episode.number}&srv=4`,
+      quality: "1080p",
+    },
   ];
 
   return (
