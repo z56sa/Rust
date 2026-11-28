@@ -290,8 +290,22 @@ export async function GET(req: NextRequest) {
   const rawMal = searchParams.get("mal");
   const srv = searchParams.get("srv");
 
-  let streamUrl = "";
-  let isDirectVideo = false;
+  // Allow checking Slayer debug logs directly via ?debug=1
+  const debug = searchParams.get("debug");
+  if (debug === "1" && slug) {
+    const logs: string[] = [];
+    const origLog = console.log;
+    const origErr = console.error;
+    console.log = (...args) => { logs.push(args.join(" ")); origLog(...args); };
+    console.error = (...args) => { logs.push("[ERR] " + args.join(" ")); origErr(...args); };
+    try {
+      const res = await resolveSlayerStream(slug, ep);
+      return NextResponse.json({ success: !!res, result: res, logs });
+    } finally {
+      console.log = origLog;
+      console.error = origErr;
+    }
+  }
 
   // If specific server index requested:
   if (srv === "2") {
